@@ -38,7 +38,7 @@ module OmniAuth
         }
       end
 
-      # Return info gathered from the yahoo.people.getInfo API call 
+      # Return info gathered from the v1/user/:id/profile API call 
      
       def raw_info
         # This is a public API and does not need signing or authentication
@@ -48,7 +48,7 @@ module OmniAuth
         raise ::Timeout::Error
       end
 
-      # Provide the "Person" portion of the raw_info
+      # Provide the "Profile" portion of the raw_info
       
       def user_info
         @user_info ||= raw_info.nil? ? {} : raw_info["profile"]
