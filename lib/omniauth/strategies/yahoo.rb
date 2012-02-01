@@ -10,10 +10,10 @@ module OmniAuth
       option :name, 'yahoo'
       
       option :client_options, {
-        :access_token_path => '/oauth/v2/get_token',
-        :authorize_path => '/oauth/v2/request_auth',
+        :access_token_path  => '/oauth/v2/get_token',
+        :authorize_path     => '/oauth/v2/request_auth',
         :request_token_path => '/oauth/v2/get_request_token',
-        :site => 'https://api.login.yahoo.com'
+        :site               => 'https://api.login.yahoo.com'
       }
 
       uid { 
@@ -21,12 +21,18 @@ module OmniAuth
       }
       
       info do 
+        primary_email = nil
+        if user_info['emails']
+          email_info    = user_info['emails'].find{|e| e['primary']} || user_info['emails'].first
+          primary_email = email_info['handle']
+        end
         {
-          :nickname => user_info['nickname'],
-          :name => user_info['givenName'] || user_info['nickname'],
-          :image => user_info['image']['imageUrl'],
+          :nickname    => user_info['nickname'],
+          :name        => user_info['givenName'] || user_info['nickname'],
+          :image       => user_info['image']['imageUrl'],
           :description => user_info['message'],
-          :urls => {
+          :email       => primary_email,
+          :urls        => {
             'Profile' => user_info['profileUrl'],
           }
         }
