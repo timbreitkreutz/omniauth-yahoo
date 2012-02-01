@@ -6,6 +6,10 @@ For more information see the following:
 
 Release notes:
 
+ * Version 0.0.3
+ 
+  - Added primary email as per famoseagle
+  
  * Version 0.0.1
 
    - First cut
