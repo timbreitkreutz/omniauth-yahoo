@@ -39,9 +39,9 @@ module OmniAuth
       end
       
       extra do
-        {
-          :raw_info => raw_info
-        }
+        hash = {}
+        hash[:raw_info] = raw_info unless skip_info?
+        hash
       end
 
       # Return info gathered from the v1/user/:id/profile API call 
