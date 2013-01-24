@@ -28,7 +28,9 @@ module OmniAuth
         end
         {
           :nickname    => user_info['nickname'],
-          :name        => user_info['givenName'] || user_info['nickname'],
+          :name        => "#{user_info['givenName']} #{user_info['familyName']}" || user_info['nickname'],
+          :first_name  => user_info['givenName'],
+          :last_name   => user_info['familyName'],
           :image       => user_info['image']['imageUrl'],
           :description => user_info['message'],
           :email       => primary_email,
