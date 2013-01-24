@@ -43,7 +43,6 @@ module OmniAuth
       extra do
         hash = {}
         hash[:raw_info] = raw_info unless skip_info?
-        hash[:contacts] = contacts_info
         hash
       end
 
@@ -57,40 +56,10 @@ module OmniAuth
         raise ::Timeout::Error
       end
 
-      # Provide the "Contacts" portion of the raw_info
-
-      def contacts_info
-        request = "http://social.yahooapis.com/v1/user/#{uid}/contacts?format=json"
-        @contacts_info ||= begin
-          _contacts_info = slim(MultiJson.decode(access_token.get(request).body))
-          @env['omniauth.contacts'] = _contacts_info
-          _contacts_info
-        end
-      rescue ::Errno::ETIMEDOUT
-        raise ::Timeout::Error
-      end
-
       # Provide the "Profile" portion of the raw_info
 
       def user_info
         @user_info ||= raw_info.nil? ? {} : raw_info["profile"]
-      end
-
-      private
-
-      def slim(contacts)
-        _contacts = []
-
-        contacts['contacts']['contact'].each do |contact|
-          email, nickname = nil, nil
-
-          contact['fields'].each do |field|
-            email = field['value'] if field['type'] == 'email'
-            nickname = field['value'] if field['type'] == 'nickname'
-          end
-          _contacts << { :email => email, :nickname => nickname }
-        end
-        _contacts
       end
     end
   end
