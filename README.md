@@ -6,6 +6,10 @@ For more information see the following:
 
 Release notes:
 
+ * Version 0.0.5
+
+  - Use HTTPS for social API
+
  * Version 0.0.4
  
   - Added skip_info? patch from mkdynamic
