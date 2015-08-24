@@ -19,4 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'omniauth-oauth', '~> 1.0'
+
+  s.license = 'MIT'
 end
