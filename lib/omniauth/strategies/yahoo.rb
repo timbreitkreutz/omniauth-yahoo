@@ -22,7 +22,7 @@ module OmniAuth
 
       info do
         primary_email = nil
-        if user_info['emails']
+        if user_info['emails'] && !user_info['emails'].empty?
           email_info    = user_info['emails'].find{|e| e['primary']} || user_info['emails'].first
           primary_email = email_info['handle']
         end
