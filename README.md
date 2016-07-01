@@ -6,6 +6,10 @@ For more information see the following:
 
 Release notes:
 
+ * Version 0.0.8
+
+  - Handle empty emails array
+
  * Version 0.0.7
 
   - Add licence to gemspec
